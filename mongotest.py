@@ -4,6 +4,7 @@ dburi = "mongodb://127.0.0.1"
 client = pymongo.MongoClient(dburi)
 db = client["data"]
 collection = db["data"]
+collection.ensure_index('docname', unique=True)
 
 
 def libproj2_add_doc(docdata):
@@ -44,3 +45,7 @@ def libproj2_update_doc_data(filter, updatedata):
 
 def JTI_initialize_doc():
     collection.delete_many({})
+
+
+if __name__ == '__main__':
+    print(collection.count())
